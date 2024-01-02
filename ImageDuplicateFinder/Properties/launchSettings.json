@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ImageDuplicateFinder (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ImageDuplicateFinder (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
