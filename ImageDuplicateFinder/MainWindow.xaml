@@ -6,21 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:ImageDuplicateFinder.Controls" xmlns:models="using:ImageDuplicateFinder.Models" xmlns:views="using:ImageDuplicateFinder.Views"
     mc:Ignorable="d">
-
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,20,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <TextBox Margin="5" x:Name="pathTextbox" Width="200"/>
-            <Button Margin="5" Click="myButton_Click">Start</Button>
-        </StackPanel>
-        
-        <views:CompareImagesView/>
-    </Grid>
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
+    <views:CompareImagesView/>
 </Window>

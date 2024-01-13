@@ -4,45 +4,83 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:models="using:ImageDuplicateFinder.Models"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    xmlns:models="using:ImageDuplicateFinder.Models" xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    mc:Ignorable="d">
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
-        <GridView Grid.Row="0"
-            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-            x:Name="duplicatesGridView"
-            IsItemClickEnabled="True"
-                  ItemClick="duplicatesGridView_ItemClick"
-            SelectionMode="Single">
-            <GridView.ItemTemplate>
-                <DataTemplate x:DataType="models:DuplicateImageItem">
-                    <Image Tag="{x:Bind}" Stretch="UniformToFill" Source="{x:Bind FirstItem}" Width="200"/>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
+        <CommandBar Grid.Row="0" OverflowButtonVisibility="Collapsed" HorizontalAlignment="Center">
+            <AppBarButton Icon="Delete" Click="DeleteSelected_Click"/>
+            <AppBarButton>
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE946;" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton>
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE713;" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBar>
 
-        <GridView Grid.Row="1"
-            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-            x:Name="compareImageGrid"
-            IsItemClickEnabled="True"
-            SelectionMode="Single">
-            <GridView.ItemTemplate>
-                <DataTemplate x:DataType="x:String">
-                    <Image Tag="{x:Bind}" Stretch="UniformToFill" Source="{x:Bind}" Width="500" />
-                </DataTemplate>
-            </GridView.ItemTemplate>
-            <GridView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <ItemsWrapGrid Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        </GridView>
+            <controls:GridSplitter Grid.Column="1"
+                               Width="16"
+                               HorizontalAlignment="Center"
+                               ResizeBehavior="BasedOnAlignment"
+                               ResizeDirection="Auto" VerticalAlignment="Stretch"/>
+
+            <GridView Grid.Column="0"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                x:Name="duplicatesGridView"
+                IsItemClickEnabled="True"
+                ItemClick="duplicatesGridView_ItemClick"
+                SelectionMode="Single">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="models:DuplicateImageItem">
+                        <Image Tag="{x:Bind}" Stretch="UniformToFill" Source="{x:Bind FirstItem}" Width="200"/>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+            <GridView Grid.Column="2"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                x:Name="compareImageGrid"
+                IsItemClickEnabled="True"
+                SelectionMode="Extended">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Image Stretch="UniformToFill" Source="{x:Bind}" Width="500" />
+                            <TextBlock Margin="5" Text="{x:Bind}" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+            </GridView>
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="0,20,0,0" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" HorizontalAlignment="Stretch" Margin="5" x:Name="pathTextbox"/>
+            <Button Style="{ThemeResource AccentButtonStyle}" Grid.Column="1" Margin="5" Click="FindDuplicates_Click">Start</Button>
+        </Grid>
     </Grid>
 </Page>
