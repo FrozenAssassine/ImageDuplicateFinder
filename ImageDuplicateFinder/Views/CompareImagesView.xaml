@@ -4,7 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:models="using:ImageDuplicateFinder.Models" xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:models="using:ImageDuplicateFinder.Models" 
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -16,7 +18,7 @@
 
         <CommandBar Grid.Row="0" OverflowButtonVisibility="Collapsed" HorizontalAlignment="Center">
             <AppBarButton Icon="Delete" Click="DeleteSelected_Click"/>
-            <AppBarButton>
+            <AppBarButton Click="About_Click">
                 <AppBarButton.Icon>
                     <FontIcon Glyph="&#xE946;" />
                 </AppBarButton.Icon>
@@ -54,14 +56,16 @@
                 </GridView.ItemTemplate>
             </GridView>
             <GridView Grid.Column="2"
-                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                      HorizontalContentAlignment="Stretch"
+                HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Stretch"
                 x:Name="compareImageGrid"
                 IsItemClickEnabled="True"
                 SelectionMode="Extended">
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="x:String">
-                        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <Image Stretch="UniformToFill" Source="{x:Bind}" Width="500" />
+                        <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Image Stretch="UniformToFill" Source="{x:Bind}" MaxWidth="400" MinWidth="200"/>
                             <TextBlock Margin="5" Text="{x:Bind}" HorizontalAlignment="Left"/>
                         </StackPanel>
                     </DataTemplate>

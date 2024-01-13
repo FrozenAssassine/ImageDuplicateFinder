@@ -13,6 +13,9 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Controls\SearchProgressControl.xaml" />
+    <None Remove="Controls\SettingsControl.xaml" />
+    <None Remove="Controls\SettingsItemSeparator.xaml" />
+    <None Remove="Views\AboutPage.xaml" />
     <None Remove="Views\CompareImagesView.xaml" />
     <None Remove="Views\FindDuplicatesPage.xaml" />
   </ItemGroup>
@@ -41,6 +44,21 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\SettingsItemSeparator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\SettingsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\AboutPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\CompareImagesView.xaml">

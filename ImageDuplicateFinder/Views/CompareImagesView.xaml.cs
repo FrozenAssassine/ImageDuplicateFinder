@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Controls;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Windows.ApplicationModel.Appointments;
 
 namespace ImageDuplicateFinder.Views
 { 
@@ -44,6 +45,12 @@ namespace ImageDuplicateFinder.Views
             duplicates = res.Where(x => x.Value.Path.Count > 1).Select(x => x.Value).ToList();
 
             duplicatesGridView.ItemsSource = duplicates;
+        }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            App.m_window.ShowBackArrow = true;
+            App.m_window.MainFrame.Navigate(typeof(AboutPage));
         }
     }
 }
