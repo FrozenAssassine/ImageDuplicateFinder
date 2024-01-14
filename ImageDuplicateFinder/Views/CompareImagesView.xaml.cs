@@ -12,6 +12,7 @@ namespace ImageDuplicateFinder.Views
     public sealed partial class CompareImagesView : Page
     {
         private List<DuplicateImageItem> duplicates;
+        private DuplicateImageItem clickedItem;
 
         public CompareImagesView()
         {
@@ -21,8 +22,8 @@ namespace ImageDuplicateFinder.Views
         private void duplicatesGridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             compareImageGrid.Items.Clear();
-            var clickedDuplicate = e.ClickedItem as DuplicateImageItem;
-            foreach(var item in clickedDuplicate.Path)
+            clickedItem = e.ClickedItem as DuplicateImageItem;
+            foreach(var item in clickedItem.Path)
             {
                 compareImageGrid.Items.Add(item);
             }
@@ -36,6 +37,19 @@ namespace ImageDuplicateFinder.Views
                 compareImageGrid.Items.Remove(path);
                 duplicates[duplicatesGridView.SelectedIndex].Path.Remove(path);
                 File.Delete(path);
+            }
+
+            if (compareImageGrid.Items.Count <= 1 && clickedItem != null)
+            {
+                duplicates.Remove(clickedItem);
+                duplicatesGridView.ItemsSource = null;
+                duplicatesGridView.ItemsSource = duplicates;
+            }
+
+            if(duplicates.Count <= 0)
+            {
+                duplicatesGridView.ItemsSource = null;
+                compareImageGrid.Items.Clear();
             }
         }
 
