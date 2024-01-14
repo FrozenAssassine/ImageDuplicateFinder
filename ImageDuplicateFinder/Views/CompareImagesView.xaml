@@ -17,7 +17,11 @@
         </Grid.RowDefinitions>
 
         <CommandBar Grid.Row="0" OverflowButtonVisibility="Collapsed" HorizontalAlignment="Center">
-            <AppBarButton Icon="Delete" Click="DeleteSelected_Click"/>
+            <AppBarButton Icon="Delete" Click="DeleteSelected_Click">
+                <AppBarButton.KeyboardAccelerators>
+                    <KeyboardAccelerator Key="Delete"/>
+                </AppBarButton.KeyboardAccelerators>
+            </AppBarButton>
             <AppBarButton Click="About_Click">
                 <AppBarButton.Icon>
                     <FontIcon Glyph="&#xE946;" />
