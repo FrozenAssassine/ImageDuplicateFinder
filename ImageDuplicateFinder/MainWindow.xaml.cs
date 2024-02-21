@@ -20,7 +20,8 @@ public sealed partial class MainWindow : Window
         SetTitleBar(titleBar);
         ShowBackArrow = false;
         Title = Package.Current.DisplayName;
-        this.AppWindow.SetIcon(Path.Combine(Package.Current.InstalledLocation.Path, "Assets\\AppIcon\\appicon.ico"));
+
+        this.AppWindow.SetIcon(Path.Combine(Package.Current.InstalledLocation.Path, "Assets\\appicon.ico"));
 
         this.MainFrame.Navigate(typeof(CompareImagesView));
     }

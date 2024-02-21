@@ -19,7 +19,7 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Source="ms-appx:///Assets/AppIcon/Icon.png"
+                <Image Grid.Column="0" Source="ms-appx:///Assets/Icon.png"
                    HorizontalAlignment="Left" 
                    Width="16" Height="16" 
                    Margin="8,0"/>
