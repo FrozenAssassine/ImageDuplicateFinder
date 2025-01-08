@@ -7,6 +7,7 @@
     mc:Ignorable="d">
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="300" MinHeight="100">
-        <controls:SearchProgressControl x:Name="searchProgress" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <controls:SearchProgressControl Visibility="Collapsed" x:Name="searchProgress" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <TextBlock x:Name="recursiveScanInfo" Text="Recursively scanning your pc for image files. This may take some time..."/>
     </Grid>
 </Page>

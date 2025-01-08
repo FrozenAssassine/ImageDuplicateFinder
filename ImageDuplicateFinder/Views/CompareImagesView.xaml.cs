@@ -1,17 +1,19 @@
 using ImageDuplicateFinder.Dialogs;
+using ImageDuplicateFinder.Helper;
 using ImageDuplicateFinder.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Windows.ApplicationModel.Appointments;
 
 namespace ImageDuplicateFinder.Views
 { 
     public sealed partial class CompareImagesView : Page
     {
         private List<DuplicateImageItem> duplicates;
+        private bool IsImageSelected;
+
         private DuplicateImageItem clickedItem;
 
         public CompareImagesView()
@@ -31,6 +33,9 @@ namespace ImageDuplicateFinder.Views
 
         private void DeleteSelected_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
+            if (duplicates == null)
+                return;
+
             List<string> deleteItems = compareImageGrid.SelectedItems.Select(x=>x.ToString()).ToList();
             foreach (string path in deleteItems)
             {
@@ -65,6 +70,20 @@ namespace ImageDuplicateFinder.Views
         {
             App.m_window.ShowBackArrow = true;
             App.m_window.MainFrame.Navigate(typeof(AboutPage));
+        }
+
+        private async void PickFolder_Click(object sender, RoutedEventArgs e)
+        {
+            var res = await FolderPickerHelper.PickFolder();
+            if (!res.success)
+                return;
+
+            pathTextbox.Text = res.path;
+        }
+
+        private void compareImageGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            deleteButton.IsEnabled = compareImageGrid.SelectedItem != null;
         }
     }
 }

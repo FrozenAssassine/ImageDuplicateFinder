@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <CommandBar Grid.Row="0" OverflowButtonVisibility="Collapsed" HorizontalAlignment="Center">
-            <AppBarButton Icon="Delete" Click="DeleteSelected_Click">
+            <AppBarButton IsEnabled="False" x:Name="deleteButton" Icon="Delete" Click="DeleteSelected_Click">
                 <AppBarButton.KeyboardAccelerators>
                     <KeyboardAccelerator Key="Delete"/>
                 </AppBarButton.KeyboardAccelerators>
@@ -65,7 +65,8 @@
                       VerticalAlignment="Stretch"
                 x:Name="compareImageGrid"
                 IsItemClickEnabled="True"
-                SelectionMode="Extended">
+                SelectionMode="Extended" 
+                      SelectionChanged="compareImageGrid_SelectionChanged">
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="x:String">
                         <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -86,9 +87,13 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" HorizontalAlignment="Stretch" Margin="5" x:Name="pathTextbox"/>
-            <Button Style="{ThemeResource AccentButtonStyle}" Grid.Column="1" Margin="5" Click="FindDuplicates_Click">Start</Button>
+            <TextBox PlaceholderText="Scan location" Grid.Column="0" HorizontalAlignment="Stretch" Margin="5" x:Name="pathTextbox"/>
+            <Button Grid.Column="1" Margin="5" Click="PickFolder_Click">
+                <FontIcon Glyph="&#xE838;" />
+            </Button>
+            <Button Style="{ThemeResource AccentButtonStyle}" Grid.Column="2" Margin="5" Click="FindDuplicates_Click">Start</Button>
         </Grid>
     </Grid>
 </Page>
